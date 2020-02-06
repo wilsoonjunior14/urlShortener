@@ -1,0 +1,14 @@
+.panel-center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.panel-center .btn{
+	width: 100%;
+}
+
+.toolbar-top{
+	margin: -10px;
+}

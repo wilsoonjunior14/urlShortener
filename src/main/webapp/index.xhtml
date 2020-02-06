@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+ 
+     <h:head>
+ 		<title>Login</title>
+ 		<h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+     </h:head>
+ 
+     <h:body>
+ 
+         <h:form>
+         	<p:growl id="messages" showDetail="true"></p:growl>
+         	<p:panel styleClass="panel-center" header="Login">
+         		<h:panelGrid columns="1">
+         			<p:inputText maxlength="255" placeholder="Email" value="#{loginBean.email}"></p:inputText>
+	         		<p:password maxlength="255" placeholder="Senha" value="#{loginBean.password}"></p:password>
+	         	
+	         		<p:separator></p:separator>
+	         		<p:commandLink value="Cadastre-se" action="cadastro"></p:commandLink>
+	         		<p:commandButton ajax="false" update="@form" styleClass="btn" value="Login" action="#{loginBean.login}" ></p:commandButton>
+         		</h:panelGrid>
+         	</p:panel>
+         </h:form>
+         
+ 
+     </h:body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+ 
+     <h:head>
+ 		<title>Listagem de Urls</title>
+ 		<h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+     </h:head>
+ 
+     <h:body>
+ 
+         <h:form>
+         	<p:toolbar>
+		 
+		 		<f:facet name="left">
+		 			<p:outputLabel value="#{uRLBean.usuario.name}"></p:outputLabel>
+		 		</f:facet>
+		 
+		        <f:facet name="right">
+		            <p:menuButton value="Options">
+		                <p:menuitem value="Sair"/>
+		            </p:menuButton>
+		        </f:facet>
+		 
+		    </p:toolbar>
+		    
+		    <p:panel header="Listagem de URLs">
+		    	
+		    	<h:panelGrid columns="6">
+		    		<p:inputText maxlength="255" value="#{uRLBean.url.old_url}"></p:inputText>
+		    		<p:commandButton value="Encurtar URL" action="#{uRLBean.adicionarURL}" update="@form"></p:commandButton>
+		    		<p:outputLabel value="#{uRLBean.nova_url}" rendered="#{exibir}"></p:outputLabel>
+		    	</h:panelGrid>
+		    	
+		    	<p:dataTable var="url" value="#{uRLBean.listURLs}">
+		    	
+		    		<p:column headerText="URL Original">
+		    			<p:outputLabel value="#{url.old_url}"></p:outputLabel>
+		    		</p:column>
+		    		
+		    		<p:column headerText="Nova URL">
+		    			<p:outputLabel value="#{url.new_url}"></p:outputLabel>
+		    		</p:column>
+		    		
+		    		<p:column headerText="Opções">
+		    		</p:column>
+		    	
+		    	</p:dataTable>
+		    	
+		    </p:panel>
+         </h:form>
+         
+ 
+     </h:body>
+</html>
