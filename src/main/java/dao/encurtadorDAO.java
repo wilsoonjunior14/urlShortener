@@ -42,4 +42,35 @@ public class encurtadorDAO {
 		return false;
 	}
 	
+	public boolean save(Usuario u, Encurtador e) {
+		try {
+			entityManager.getTransaction().begin();
+			e.setUsuario(u);
+			entityManager.persist(e);
+			entityManager.getTransaction().commit();
+			return true;
+		}catch(Exception exc) {
+			entityManager.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean delete(Encurtador e) {
+		try {
+			entityManager.getTransaction().begin();
+			
+			entityManager.remove(e);
+			
+			entityManager.getTransaction().commit();
+			return true;
+		}catch(Exception exc) {
+			entityManager.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public ArrayList<Encurtador> getURLsUsuario(Usuario usuario){
+		return (ArrayList<Encurtador>) entityManager.createQuery("SELECT e FROM Encurtador e WHERE e.usuario.id = "+usuario.getId()+"").getResultList();
+	}
+	
 }

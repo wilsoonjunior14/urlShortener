@@ -2,26 +2,37 @@ package bean;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import dao.encurtadorDAO;
+import dao.usuarioDAO;
 import model.Encurtador;
 import model.Usuario;
+import util.SessionUtils;
 import util.utils;
 
 public class URLBean {
 
-	Usuario usuario = utils.usuario;
-	Encurtador url = new Encurtador();
-	ArrayList<Encurtador> listURLs = new ArrayList<Encurtador>();
-	encurtadorDAO EncurtadorDAO = encurtadorDAO.getInstance();
+	Usuario usuario 				= SessionUtils.usuario;
+	Encurtador url 					= new Encurtador();
+	ArrayList<Encurtador> listURLs  = new ArrayList<Encurtador>();
+	encurtadorDAO EncurtadorDAO 	= encurtadorDAO.getInstance();
+	usuarioDAO UsuarioDAO       	= usuarioDAO.getInstance();
+	SessionUtils session            = SessionUtils.getInstance();
+	FacesContext context 			= FacesContext.getCurrentInstance();
 	
 	boolean exibir  = false;
 	String nova_url = "";
+	
+	public URLBean() {
+		System.out.println("IS AUTHENTICATED: "+session.isAuthenticated());
+		this.listURLs = EncurtadorDAO.getURLsUsuario(usuario);
+	}
 
-	public void adicionarURL() {
-		exibir = true;
+	public void adicionarURL() {		
 		String url_base = utils.generateString();
 		
 		while (EncurtadorDAO.verifyIfExists(url_base)) {
@@ -29,8 +40,36 @@ public class URLBean {
 		}
 		nova_url = "http://localhost:8080/Modelo/"+url_base;
 		url.setNew_url(nova_url);
-		listURLs.add(url);
-		url = new Encurtador();
+		url.setData(Calendar.getInstance().getTime());
+		
+		String message = url.validate();
+		if (message.equals("")) {
+			System.out.println("USUARIO ID "+usuario.getId());
+			if (EncurtadorDAO.save(usuario, url)) {
+				System.out.println("URL Saved");
+				listURLs.add(url);
+			}else {
+				System.out.println("URL not saved");
+			}
+			url = new Encurtador();
+			context.addMessage("", new FacesMessage("Atenção!", "URL salva com sucesso!"));
+		}else {
+			context.addMessage("", new FacesMessage("Atenção!", message));
+		}
+	}
+	
+	public void removeURL(Encurtador e) {
+		System.out.println("URL "+e.getId());
+		if (EncurtadorDAO.delete(e)) {
+			context.addMessage("", new FacesMessage("Atenção", "URL Removida"));
+			listURLs = EncurtadorDAO.getURLsUsuario(usuario);
+		}else {
+			context.addMessage("", new FacesMessage("Atenção", "Erro ao remover URL"));
+		}
+	}
+	
+	public String logout() {
+		return SessionUtils.logout();
 	}
 	
 	public boolean isExibir() {

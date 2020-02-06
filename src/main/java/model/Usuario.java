@@ -29,9 +29,6 @@ public class Usuario {
 	@Column(length = 255)
 	private String password;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Encurtador> urls;
-	
 	public String validate() {
 		if (this.name.length() <= 0 || this.name.length() > 255) {
 			return "Nome inválido! Máximo de 255 caracteres são permitidos!";
@@ -47,20 +44,6 @@ public class Usuario {
 		
 		return "";
 	}
-
-	
-	
-	public List<Encurtador> getUrls() {
-		return urls;
-	}
-
-
-
-	public void setUrls(ArrayList<Encurtador> urls) {
-		this.urls = urls;
-	}
-
-
 
 	public int getId() {
 		return id;

@@ -7,6 +7,7 @@ import javax.persistence.Persistence;
 
 import antlr.collections.List;
 import connection.HibernateConnection;
+import model.Encurtador;
 import model.Usuario;
 import util.utils;
 

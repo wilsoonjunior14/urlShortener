@@ -33,42 +33,10 @@ public class utils {
 		entityManagerStatic = entity;
 	}
 	
-	public static void setUsuarioSession(Usuario u) {
-		usuario = u;
-	}
-	
 	public static String generateString() {
 		String generated = UUID.randomUUID().toString();
 		if (generated.length() > 4) return generated.substring(0, 4);
 		return generated;
-	}
-	
-	public static boolean isAuthenticated() {
-		try {
-			FacesContext context = FacesContext.getCurrentInstance();
-			Map<String, Object> session = context.getExternalContext().getSessionMap();
-			return (boolean) session.get("authenticated");
-		}catch (Exception e) {
-			return false;
-		}
-	}
-	
-	public static boolean setAuthenticated(boolean status) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Map<String, Object> session = context.getExternalContext().getSessionMap();
-		session.put("authenticated", status);
-		return (boolean) session.get("authenticated");
-	}
-	
-	public static void redirect() {
-		try {
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-			response.sendRedirect("app/list");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 }

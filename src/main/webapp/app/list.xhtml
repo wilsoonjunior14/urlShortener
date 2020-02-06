@@ -17,12 +17,12 @@
          	<p:toolbar>
 		 
 		 		<f:facet name="left">
-		 			<p:outputLabel value="#{uRLBean.usuario.name}"></p:outputLabel>
+		 			<!-- <p:outputLabel value="#{uRLBean.usuario.name}"></p:outputLabel> -->
 		 		</f:facet>
 		 
 		        <f:facet name="right">
-		            <p:menuButton value="Options">
-		                <p:menuitem value="Sair"/>
+		            <p:menuButton value="Opções">
+		                <p:menuitem action="#{uRLBean.logout}" value="Sair"/>
 		            </p:menuButton>
 		        </f:facet>
 		 
@@ -33,10 +33,10 @@
 		    	<h:panelGrid columns="6">
 		    		<p:inputText maxlength="255" value="#{uRLBean.url.old_url}"></p:inputText>
 		    		<p:commandButton value="Encurtar URL" action="#{uRLBean.adicionarURL}" update="@form"></p:commandButton>
-		    		<p:outputLabel value="#{uRLBean.nova_url}" rendered="#{exibir}"></p:outputLabel>
+		    		<p:outputLabel value="URL encurtada: #{uRLBean.nova_url}" rendered="#{uRLBean.exibir}"></p:outputLabel>
 		    	</h:panelGrid>
 		    	
-		    	<p:dataTable var="url" value="#{uRLBean.listURLs}">
+		    	<p:dataTable var="url" value="#{uRLBean.listURLs}" emptyMessage="Nenhuma URL salva">
 		    	
 		    		<p:column headerText="URL Original">
 		    			<p:outputLabel value="#{url.old_url}"></p:outputLabel>
@@ -46,8 +46,15 @@
 		    			<p:outputLabel value="#{url.new_url}"></p:outputLabel>
 		    		</p:column>
 		    		
-		    		<p:column headerText="Opções">
+		    		<p:column headerText="Data">
+		    			<h:outputText value="#{url.data}" >
+						    <f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
 		    		</p:column>
+		    		
+		    		<!--<p:column headerText="Opções">
+						<p:commandButton action="#{uRLBean.removeURL(url)}" ajax="true" process="@this" update="@form" value="Excluir" type="button"/>
+		    		</p:column>-->
 		    	
 		    	</p:dataTable>
 		    	

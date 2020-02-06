@@ -1,10 +1,13 @@
 package model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,8 +23,44 @@ public class Encurtador {
 	private String new_url;
 	
 	private String old_url;
+	
+	private Date data;
 
 	private boolean deleted;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;	
+	
+	public String validate() {
+		if (new_url.length() <= 0 || new_url.length() > 255) {
+			return "Nova URL está inválida! Máximo de 255 caracteres são permitidos";
+		}
+		if (old_url.length() <= 0 || old_url.length() > 255) {
+			return "URL está inválida! Máximo de 255 caracteres são permitidos";
+		}
+		if (data == null) {
+			return "Nova URL está inválida! Máximo de 255 caracteres são permitidos";
+		}
+		
+		return "";
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
 
 	public int getId() {
 		return id;
