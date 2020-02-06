@@ -53,9 +53,27 @@ public class SessionUtils {
 		}
 	}
 	
+	public static void redirectNow(String url) {
+		try {
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+			response.sendRedirect(url);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static String logout() {
 		setAuthenticated(false);
 		return "/index.xhtml";
+	}
+	
+	public static String getParamId() {
+		Map<String, String> params =FacesContext.getCurrentInstance().
+                getExternalContext().getRequestParameterMap();
+		String ID = params.get("id");
+		return ID;
 	}
 	
 	public static void setUsuarioSession(Usuario u) {

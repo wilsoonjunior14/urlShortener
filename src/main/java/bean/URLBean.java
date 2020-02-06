@@ -33,12 +33,13 @@ public class URLBean {
 	}
 
 	public void adicionarURL() {		
+		FacesContext context = FacesContext.getCurrentInstance();
 		String url_base = utils.generateString();
 		
 		while (EncurtadorDAO.verifyIfExists(url_base)) {
 			url_base = utils.generateString();
 		}
-		nova_url = "http://localhost:8080/Modelo/"+url_base;
+		nova_url = "http://localhost:8080/Modelo/?id="+url_base;
 		url.setNew_url(nova_url);
 		url.setData(Calendar.getInstance().getTime());
 		
@@ -59,6 +60,7 @@ public class URLBean {
 	}
 	
 	public void removeURL(Encurtador e) {
+		FacesContext context = FacesContext.getCurrentInstance();
 		System.out.println("URL "+e.getId());
 		if (EncurtadorDAO.delete(e)) {
 			context.addMessage("", new FacesMessage("Atenção", "URL Removida"));

@@ -73,4 +73,11 @@ public class encurtadorDAO {
 		return (ArrayList<Encurtador>) entityManager.createQuery("SELECT e FROM Encurtador e WHERE e.usuario.id = "+usuario.getId()+"").getResultList();
 	}
 	
+	public Encurtador getURL(String url) {
+		ArrayList<Encurtador> list = (ArrayList<Encurtador>) entityManager.createQuery("SELECT e FROM Encurtador e WHERE e.new_url = '"+url+"'").getResultList();
+		if (list == null) return null;
+		if (list.size() == 0) return null;
+		return list.get(0);
+	}
+	
 }
