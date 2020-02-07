@@ -28,7 +28,7 @@ public class Encurtador {
 
 	private boolean deleted;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;	
 	

@@ -47,7 +47,7 @@ public class usuarioDAO {
 	public Usuario login(String email, String password) {
 		try {
 			ArrayList<Usuario> usuarios = (ArrayList<Usuario>) entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.password = '"+password+"'").getResultList();
-			
+			if (usuarios.size() == 0) return null;
 			return usuarios.get(0);
 		}catch(Exception e) {
 			e.printStackTrace();

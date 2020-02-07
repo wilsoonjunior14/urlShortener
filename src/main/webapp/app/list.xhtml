@@ -14,6 +14,7 @@
      <h:body>
  
          <h:form>
+         	<p:growl id="messages" showDetail="true"></p:growl>
          	<p:toolbar>
 		 
 		 		<f:facet name="left">
@@ -31,7 +32,7 @@
 		    <p:panel header="Listagem de URLs">
 		    	
 		    	<h:panelGrid columns="6">
-		    		<p:inputText maxlength="255" value="#{uRLBean.url.old_url}"></p:inputText>
+		    		<p:inputText placeholder="Digite sua URL" maxlength="255" value="#{uRLBean.url.old_url}"></p:inputText>
 		    		<p:commandButton value="Encurtar URL" action="#{uRLBean.adicionarURL}" update="@form"></p:commandButton>
 		    		<p:outputLabel value="URL encurtada: #{uRLBean.nova_url}" rendered="#{uRLBean.exibir}"></p:outputLabel>
 		    	</h:panelGrid>
@@ -52,9 +53,10 @@
 						</h:outputText>
 		    		</p:column>
 		    		
-		    		<!--<p:column headerText="Opções">
-						<p:commandButton action="#{uRLBean.removeURL(url)}" ajax="true" process="@this" update="@form" value="Excluir" type="button"/>
-		    		</p:column>-->
+		    		<p:column headerText="Opções">
+						<p:commandButton update="@form" actionListener="#{uRLBean.removeURL(url)}" 
+						value="Excluir"></p:commandButton>
+		    		</p:column>
 		    	
 		    	</p:dataTable>
 		    	

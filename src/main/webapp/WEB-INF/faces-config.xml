@@ -17,7 +17,7 @@
 	<managed-bean>
 		<managed-bean-name>uRLBean</managed-bean-name>
 		<managed-bean-class>bean.URLBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
 </faces-config>

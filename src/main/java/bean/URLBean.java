@@ -28,8 +28,12 @@ public class URLBean {
 	String nova_url = "";
 	
 	public URLBean() {
-		System.out.println("IS AUTHENTICATED: "+session.isAuthenticated());
-		this.listURLs = EncurtadorDAO.getURLsUsuario(usuario);
+		if (!session.isAuthenticated()) {
+			session.redirect();
+		}else {
+			System.out.println("IS AUTHENTICATED: "+session.isAuthenticated());
+			this.listURLs = EncurtadorDAO.getURLsUsuario(usuario);
+		}
 	}
 
 	public void adicionarURL() {		
