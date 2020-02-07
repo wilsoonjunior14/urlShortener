@@ -46,7 +46,7 @@ public class SessionUtils {
 		try {
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-			response.sendRedirect("/index.xhtml");
+			response.sendRedirect("/Modelo/");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -21,8 +21,8 @@
 	         		<p:password maxlength="255" placeholder="Senha" value="#{loginBean.password}"></p:password>
 	         	
 	         		<p:separator></p:separator>
-	         		<p:commandLink value="Cadastre-se" action="cadastro"></p:commandLink>
-	         		<p:commandButton ajax="false" update="@form" styleClass="btn" value="Login" action="#{loginBean.login}" ></p:commandButton>
+	         		<p:commandLink ajax="false" value="Cadastre-se" action="cadastro.xhtml?faces-redirect=true"></p:commandLink>
+	         		<p:commandButton update="@form" ajax="false" styleClass="btn" value="Login" action="#{loginBean.login}" ></p:commandButton>
          		</h:panelGrid>
          	</p:panel>
          </h:form>
