@@ -1,13 +1,16 @@
 package util;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
 import javax.faces.context.FacesContext;
-import javax.mail.internet.InternetAddress;
+//import javax.mail.internet.InternetAddress;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +31,16 @@ public class utils {
 		   }
 		   return result;
 	}
+	
+	public static boolean isValidURL(String urlString){
+        try {
+        	URL url = new URL(urlString);
+        	url.toURI();
+        	return true;
+        }catch(Exception e) {
+        	return false;
+        }
+    }
 	
 	public static void setEntityManager(EntityManager entity) {
 		entityManagerStatic = entity;

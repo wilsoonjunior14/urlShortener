@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import util.utils;
+
 @Entity
 @Table(name = "encurtador")
 public class Encurtador {
@@ -33,10 +35,10 @@ public class Encurtador {
 	private Usuario usuario;	
 	
 	public String validate() {
-		if (new_url.length() <= 0 || new_url.length() > 255) {
+		if (new_url.length() <= 0 || new_url.length() > 255 || !utils.isValidURL(new_url)) {
 			return "Nova URL está inválida! Máximo de 255 caracteres são permitidos";
 		}
-		if (old_url.length() <= 0 || old_url.length() > 255) {
+		if (old_url.length() <= 0 || old_url.length() > 255 || !utils.isValidURL(old_url)) {
 			return "URL está inválida! Máximo de 255 caracteres são permitidos";
 		}
 		if (data == null) {
